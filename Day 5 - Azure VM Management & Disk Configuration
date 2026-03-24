@@ -1,0 +1,124 @@
+# Day 5 - Azure VM Management & Disk Configuration
+
+## 🎯 Objective
+
+To manage Azure Virtual Machine operations and configure additional storage by attaching and initializing a data disk.
+
+---
+
+## 🧠 Concepts Covered
+
+### Virtual Machine Management
+
+* Start, Stop, Restart VM
+* Resize VM (change CPU/RAM)
+* Auto-shutdown configuration
+
+### Disk Types
+
+* **OS Disk**
+
+  * Created automatically
+  * Contains operating system
+  * Mounted as C: drive
+
+* **Data Disk**
+
+  * Manually attached
+  * Used for additional storage
+  * Requires setup inside OS
+
+---
+
+## ⚙️ Lab Implementation
+
+---
+
+### 🔹 Step 1: Start and Verify VM
+
+* Navigated to VM: `VM-AZ104-01`
+* Started VM and verified status
+
+---
+
+### 🔹 Step 2: Resize VM
+
+* Opened **Size** settings
+* Reviewed available VM sizes (B-series for cost efficiency)
+* Understood CPU/RAM scaling
+
+---
+
+### 🔹 Step 3: Attach Data Disk
+
+* Navigated to **Disks**
+* Clicked **+ Create and attach new disk**
+* Disk Name: `DataDisk1`
+* Size: 4 GiB
+* Applied configuration
+
+---
+
+### 🔹 Step 4: Configure Disk (Server Core)
+
+Since the VM is running **Windows Server Core**, disk was configured using command line.
+
+#### Commands Used:
+
+```bash id="cmdblock1"
+diskpart
+list disk
+select disk 1
+create partition primary
+format fs=ntfs quick
+assign letter=D
+exit
+```
+
+---
+
+### 🔹 Step 5: Verify Disk
+
+```bash id="cmdblock2"
+D:
+dir
+```
+
+* Confirmed that D: drive is accessible
+
+---
+
+### 🔹 Step 6: Configure Auto Shutdown
+
+* Navigated to **Auto-shutdown**
+* Enabled feature
+* Set time (e.g., 22:00 IST)
+* Saved configuration
+
+---
+
+## ✅ Observations
+
+* Data disk appears as unallocated before configuration
+* Disk must be initialized and formatted inside OS
+* Server Core requires CLI-based management
+* Auto-shutdown helps prevent unnecessary usage
+
+---
+
+## 📸 Screenshots
+
+
+
+* VM overview
+* VM size page
+* Disk blade (Azure)
+* DiskPart commands
+* D drive verification
+* Auto-shutdown settings
+
+---
+
+## 🚀 Conclusion
+
+Successfully managed Azure VM operations and configured additional storage using DiskPart in a Server Core environment, along with implementing auto-shutdown for better resource control.
